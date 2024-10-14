@@ -11,7 +11,7 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
     this.emailInput = this.page.locator('#ap_email');
-    this.continueButton = this.page.locator('#continue');
+    this.continueButton = this.page.locator('#continue-announce');
     this.passwordInput = this.page.locator('#ap_password');
     this.loginButton = this.page.locator('#signInSubmit');
   }
@@ -28,7 +28,7 @@ export class LoginPage {
   }
 
   async withGoodCredentials() {
-    await this.login('', '');
+    await this.login('langer.arnaud@neuf.fr', "Aigrisen");
   }
 }
 
