@@ -8,7 +8,8 @@ export class CartPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.deleteButton = this.page.locator('#delete-button')
+        this.deleteButton = this.page.locator('text="Supprimer"')
+
 
     }
 
