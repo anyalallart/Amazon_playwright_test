@@ -5,6 +5,8 @@ import { CartPage } from './cart';
 import { SearchFromBar } from './searchFromBar';
 import { AddToCartButton } from './addToCart';
 import { createAccount } from './creatingAccount';
+import { SearchPage } from './searchProductCategory';
+import { ChangeLanguage } from './changeLanguage';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://www.amazon.fr/');
@@ -21,22 +23,15 @@ test('Create an account', async ({ page }) => {
   await createAccountPage.createAccountWithCredentials();
 });
 
-test('Proceed to checkout', async ({ page }) => {
-  const checkoutPage = new CheckoutPage(page);
-  await checkoutPage.proceedToCheckout();
+test('Create an account with existing email', async ({ page }) => {
+  const createAccountExistingEmailPage = new createAccount(page);
+  await createAccountExistingEmailPage.createAccountExistingEmailWithCredentials();
 });
 
-test('Delete from Cart', async ({ page }) => {
-  const cartPage = new CartPage(page);
-  await cartPage.GoToCartPage();
-  await cartPage.deleteCart();
+test('Search category', async ({ page }) => {
+  const searchPage = new SearchPage(page);
+  await searchPage.searchInAllBooks();
 });
-
-test('Modify Cart', async ({ page }) => {
-  const cartPage = new CartPage(page);
-  await cartPage.GoToCartPage();
-  await cartPage.ModifyQuantity();
-})
 
 test('Search', async ({ page }) => {
   const searchFromBar = new SearchFromBar(page);
@@ -49,4 +44,43 @@ test ('Add to cart', async ({ page }) => {
   await searchFromBar.searchTablier();
   await addtochartButton.gotoPageArticle();
   await addtochartButton.addToCart();
+});
+
+test('Delete from Cart', async ({ page }) => {
+  const addtochartButton = new AddToCartButton(page);
+  const searchFromBar = new SearchFromBar(page);
+  const cartPage = new CartPage(page);
+  await searchFromBar.searchTablier();
+  await addtochartButton.gotoPageArticle();
+  await addtochartButton.addToCart();
+  await cartPage.GoToCartPage();
+  await cartPage.deleteCart();
+});
+
+test('Modify Cart', async ({ page }) => {
+  const addtochartButton = new AddToCartButton(page);
+  const searchFromBar = new SearchFromBar(page);
+  const cartPage = new CartPage(page);
+  await searchFromBar.searchTablier();
+  await addtochartButton.gotoPageArticle();
+  await addtochartButton.addToCart();
+  await cartPage.GoToCartPage();
+  await cartPage.ModifyQuantity();
+})
+
+test('Proceed to checkout', async ({ page }) => {
+  const checkoutPage = new CheckoutPage(page);
+  const addtochartButton = new AddToCartButton(page);
+  const searchFromBar = new SearchFromBar(page);
+  const cartPage = new CartPage(page);
+  await searchFromBar.searchTablier();
+  await addtochartButton.gotoPageArticle();
+  await addtochartButton.addToCart();
+  await cartPage.GoToCartPage();
+  await checkoutPage.proceedToCheckout();
+});
+
+test('Change language', async ({ page }) => {
+  const changeLanguage = new ChangeLanguage(page);
+  await changeLanguage.changeLanguage();
 });
