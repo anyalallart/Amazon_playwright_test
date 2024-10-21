@@ -18,7 +18,7 @@ export class SearchFromBar {
    
   }
 
-  async withGoodCredentials() {
+  async SearchTablier() {
     await this.search("Tablier Beauf");
   }
 }
