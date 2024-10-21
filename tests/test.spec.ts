@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from './login';
 import { CheckoutPage } from './checkout';
 import { CartPage } from './cart';
-import { SearchFromBar } from './SearchFromBar';
+import { SearchFromBar } from './searchFromBar';
 import { AddToCartButton } from './addToCart';
 
 test.beforeEach(async ({ page }) => {
@@ -34,11 +34,12 @@ test('Modify Cart', async ({ page }) => {
 
 test('Search', async ({ page }) => {
   const searchFromBar = new SearchFromBar(page);
-  await searchFromBar.SearchTablier();
+  await searchFromBar.searchTablier();
 });
 
 test ('Add to cart', async ({ page }) => {
   const addtochartButton = new AddToCartButton(page);
-  await addtochartButton.searchTablier();
+  const searchFromBar = new SearchFromBar(page);
+  await searchFromBar.searchTablier();
   await addtochartButton.addToCart();
 });
