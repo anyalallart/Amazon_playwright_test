@@ -6,7 +6,7 @@ export class CheckoutPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.proceedToCheckoutButton = this.page.locator('input[name="proceed-to-checkout-action"]'); // Modifier le sélecteur en fonction du bouton réel sur la page
+        this.proceedToCheckoutButton = this.page.locator('text= " Passer la commande "'); // Modifier le sélecteur en fonction du bouton réel sur la page
     }
 
     async proceedToCheckout() {
