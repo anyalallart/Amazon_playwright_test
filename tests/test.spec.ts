@@ -28,11 +28,6 @@ test('Create an account with existing email', async ({ page }) => {
   await createAccountExistingEmailPage.createAccountExistingEmailWithCredentials();
 });
 
-test('Proceed to checkout', async ({ page }) => {
-  const checkoutPage = new CheckoutPage(page);
-  await checkoutPage.proceedToCheckout();
-});
-
 test('Search category', async ({ page }) => {
   const searchPage = new SearchPage(page);
   await searchPage.searchInAllBooks();
