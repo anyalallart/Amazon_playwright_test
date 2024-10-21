@@ -10,8 +10,9 @@ export class SearchPage {
     constructor(page: Page) {
         this.page = page;
         this.categoryButton = this.page.locator('#nav-hamburger-menu'); // Sélecteur pour le bouton de catégorie
-        this.automotiveCategoryButton = this.page.locator('a[href*="automotive"]'); // Sélecteur pour la catégorie "Automotive"
-        this.searchButton = this.page.locator('input.nav-input[type="submit"]'); // Sélecteur pour le bouton de recherche
+        this.automotiveCategoryButton = this.page.locator('a[data-menu-id="9"]'); //SElecteur pour aller dans Livres
+        this.searchButton = this.page.locator('input[type="submit"]'); // Sélecteur pour le bouton de recherche
+        this.searchButton = this.page.locator('a[href="/gp/browse.html?node=301061&amp;ref_=nav_em__lv_0_2_9_2"]'); // Sélecteur pour le bouton de recherche
         this.searchResults = this.page.locator('.s-main-slot'); // Sélecteur pour les résultats de recherche
     }
 
