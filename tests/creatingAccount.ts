@@ -1,4 +1,4 @@
-import { Page, Locator, test, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class createAccount {
   private page: Page;
@@ -9,6 +9,7 @@ export class createAccount {
   private passwordInput: Locator;
   private passwordInputCheck: Locator;
   private continueButton: Locator;
+  private errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,6 +20,7 @@ export class createAccount {
     this.passwordInput = this.page.locator('#ap_password');
     this.passwordInputCheck = this.page.locator('#ap_password_check');
     this.continueButton = this.page.locator('#continue');
+    this.errorMessage = this.page.locator('#register-mase-inlineerror');
   }
 
   async goToCreateAccount() {
@@ -32,12 +34,28 @@ export class createAccount {
     await this.passwordInput.fill(password);
     await this.passwordInputCheck.fill(passwordCheck);
     await this.continueButton.click();
-    await this.page.pause();
+    // await this.page.pause();
   }
 
   async createAccountWithCredentials() {
     await this.goToCreateAccount();
-    await this.createAccount('Jean Kulki', 'votre_email@example.com', 'MonP@ssword', 'MonP@ssword');
+    await this.createAccount('Jean Kulki', 'langer.arnaud@neuf.fr', 'MonP@ssword', 'MonP@ssword');
+  }
+
+
+  async createAccountExistingEmail(name: string, email: string, password: string, passwordCheck: string) {
+    await this.nameInput.fill(name);
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.passwordInputCheck.fill(passwordCheck);
+    await this.continueButton.click();
+    await this.page.pause();
+    await expect(this.errorMessage).toContainText("Il existe déjà un compte associé à cette adresse e-mail.");
+  }
+
+  async createAccountExistingEmailWithCredentials() {
+    await this.goToCreateAccount();
+    await this.createAccountExistingEmail('Jean Kulki', 'greg.libert@free.fr', 'MonP@ssword', 'MonP@ssword');
   }
 
 }

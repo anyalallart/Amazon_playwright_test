@@ -21,6 +21,11 @@ test('Create an account', async ({ page }) => {
   await createAccountPage.createAccountWithCredentials();
 });
 
+test('Create an account with existing email', async ({ page }) => {
+  const createAccountExistingEmailPage = new createAccount(page);
+  await createAccountExistingEmailPage.createAccountExistingEmailWithCredentials();
+});
+
 test('Proceed to checkout', async ({ page }) => {
   const checkoutPage = new CheckoutPage(page);
   await checkoutPage.proceedToCheckout();
