@@ -4,6 +4,7 @@ import { CheckoutPage } from './checkout';
 import { CartPage } from './cart';
 import { SearchFromBar } from './searchFromBar';
 import { AddToCartButton } from './addToCart';
+import { createAccount } from './creatingAccount';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://www.amazon.fr/');
@@ -13,6 +14,11 @@ test.beforeEach(async ({ page }) => {
 test('Login', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.withGoodCredentials();
+});
+
+test('Create an account', async ({ page }) => {
+  const createAccountPage = new createAccount(page);
+  await createAccountPage.createAccountWithCredentials();
 });
 
 test('Proceed to checkout', async ({ page }) => {
@@ -41,5 +47,6 @@ test ('Add to cart', async ({ page }) => {
   const addtochartButton = new AddToCartButton(page);
   const searchFromBar = new SearchFromBar(page);
   await searchFromBar.searchTablier();
+  await addtochartButton.gotoPageArticle();
   await addtochartButton.addToCart();
 });

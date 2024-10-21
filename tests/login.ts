@@ -36,6 +36,7 @@ export class LoginPage {
   async withGoodCredentials() {
     await this.goToLoginPage();
     await this.login('langer.arnaud@neuf.fr', "Aigrisen");
+    //await this.login('votre_email@example.com', "Aigrisen");
   }
 }
 

@@ -2,21 +2,28 @@ import { Page, Locator, test, expect } from '@playwright/test';
 
 export class createAccount {
   private page: Page;
+  private buttonCreateAccount: Locator;
+  private loginPage: Locator;
   private nameInput: Locator;
   private emailInput: Locator;
   private passwordInput: Locator;
   private passwordInputCheck: Locator;
+  private continueButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.buttonCreateAccount = this.page.locator('#createAccountSubmit');
+    this.loginPage = this.page.locator('#nav-link-accountList');
     this.nameInput = this.page.locator('#ap_customer_name');
     this.emailInput = this.page.locator('#ap_email');
     this.passwordInput = this.page.locator('#ap_password');
     this.passwordInputCheck = this.page.locator('#ap_password_check');
+    this.continueButton = this.page.locator('#continue');
   }
 
   async goToCreateAccount() {
-    this.page.goto('https://www.amazon.fr/ap/register?showRememberMe=true&openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.fr%2Fref%3Dnav_ya_signin&prevRID=6EFVATBQPQXM2QA2X48Q&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=frflex&openid.mode=checkid_setup&prepopulatedLoginId=&failedSignInCount=0&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=frflex&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0');
+    await this.loginPage.click();
+    await this.buttonCreateAccount.click();
   }
 
   async createAccount(name: string, email: string, password: string, passwordCheck: string) {
@@ -24,9 +31,12 @@ export class createAccount {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.passwordInputCheck.fill(passwordCheck);
+    await this.continueButton.click();
+    await this.page.pause();
   }
 
   async createAccountWithCredentials() {
+    await this.goToCreateAccount();
     await this.createAccount('Jean Kulki', 'votre_email@example.com', 'MonP@ssword', 'MonP@ssword');
   }
 
