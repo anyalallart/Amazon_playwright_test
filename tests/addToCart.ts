@@ -14,6 +14,7 @@ export class AddToCartButton {
   async gotoPageArticle(){
     await this.SelectionArticle.click()
   }
+  
   async addToCart(){
     await this.addToCartButton.click()
   }
