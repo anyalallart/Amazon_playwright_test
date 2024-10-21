@@ -18,6 +18,7 @@ export class SearchFromBar {
 
   async searchTablier() {
     await this.search("Tablier Beauf");
+    await this.page.pause();
   }
 }
 
