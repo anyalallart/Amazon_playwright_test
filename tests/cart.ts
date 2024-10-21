@@ -8,7 +8,8 @@ export class CartPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.deleteButton = this.page.locator('#delete-button')
+        this.deleteButton = this.page.locator('text="Supprimer"')
+
 
     }
 
@@ -21,7 +22,7 @@ export class CartPage {
     }
 
     async ModifyQuantity() {
-        await this.page.click('#a-autoid-0-announce')
+        await this.page.click('#a-autoid-1-announce')
         await this.page.click('#quantity_5')
     }
 }

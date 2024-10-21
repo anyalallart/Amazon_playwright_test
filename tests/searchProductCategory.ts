@@ -1,21 +1,28 @@
-const { test, expect } = require('@playwright/test');
+import { Page, Locator, expect } from "@playwright/test";
 
-test('Search a product from a category', async ({ page }) => {
-  // Ouvre Amazon.fr
-  await page.goto('https://www.amazon.fr');
+export class SearchPage {
+    private page: Page;
+    private burgerMenuButton: Locator;
+    private booksCategoryButton: Locator;
+    private allBooksButton: Locator;
+    private searchResults: Locator;
 
-  // Vérifie que la page d'accueil est bien chargée
-  await expect(page).toHaveTitle(/Amazon/);
+    constructor(page: Page) {
+        this.page = page;
+        this.burgerMenuButton = this.page.locator('#nav-hamburger-menu'); // Sélecteur pour le menu burger
+        this.booksCategoryButton = this.page.locator('a[data-menu-id="9"]'); // Sélecteur pour "Livres"
+        this.allBooksButton = this.page.locator('a[href="/gp/browse.html?node=301061&ref_=nav_em__lv_0_2_9_2"]'); // Sélecteur pour "Tous les livres"
+        this.searchResults = this.page.locator('.s-main-slot'); // Sélecteur pour les résultats de recherche
+    }
 
-  // Clique sur le bouton pour afficher les catégories
-  await page.click('#nav-hamburger-menu');
+    async searchInAllBooks() {
+        await this.page.goto('https://www.amazon.com'); // Aller sur la page d'accueil
+        await this.burgerMenuButton.click(); // Ouvre le menu burger
+        await this.booksCategoryButton.click(); // Clique sur "Livres"
+        await this.allBooksButton.click(); // Sélectionne "Tous les livres"
+        
+        // Vérification que les résultats sont affichés
+        await expect(this.searchResults).toBeVisible();
+    }
+}
 
-  // Sélectionne la catégorie "Automotive"
-  await page.click('text=Automotive');
-
-  // Clique sur le bouton de recherche
-  await page.click('input[type="submit"]');
-
-  // Vérifie que les résultats de recherche sont affichés
-  await expect(page).toHaveURL(/s?k=Automotive/);
-});

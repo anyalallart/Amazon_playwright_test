@@ -7,8 +7,8 @@ export class AddToCartButton {
 
   constructor(page: Page) {
     this.page = page;
-    this.SelectionArticle = this.page.locator('.s-image');
-    this.addToCartButton= this.page.locator("#add-to-cart-button")
+    this.SelectionArticle = this.page.locator('text="Yuknees Tablier de Cuisine de Motif d\'Homme Muscle,Tablier Sexy et drôle,Tabliers pour Barbecue,pour Copain Cadeaux Fun Party Cuisine Gag Cadeau"');
+    this.addToCartButton= this.page.locator('#add-to-cart-button')
   }
 
   async gotoPageArticle(){
