@@ -3,6 +3,7 @@ import { Page, Locator, expect } from "@playwright/test";
 export class CartPage {
     private page: Page;
     private deleteButton: Locator;
+    private quantity: Locator;
 
 
     constructor(page: Page) {
@@ -17,6 +18,11 @@ export class CartPage {
 
     async deleteCart() {
         await this.deleteButton.click();
+    }
+
+    async ModifyQuantity(quantity: number) {
+        await this.page.click('#a-autoid-0-announce')
+        await this.page.click('#quantity_5')
     }
 }
 
