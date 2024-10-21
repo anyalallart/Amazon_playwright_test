@@ -1,15 +1,16 @@
-const { test, expect } = require('@playwright/test');
+import { Page, Locator, expect } from "@playwright/test";
 
-test('Proceed to checkout', async ({ page }) => {
-  // Ouvre la page du panier d'Amazon
-  await page.goto('https://www.amazon.fr/gp/cart/view.html');
+export class CheckoutPage {
+    private page: Page;
+    private proceedToCheckoutButton: Locator;
 
-  // Vérifie que la page du panier est bien chargée
-  await expect(page).toHaveTitle(/Votre panier/);
+    constructor(page: Page) {
+        this.page = page;
+        this.proceedToCheckoutButton = this.page.locator('input[name="proceed-to-checkout-action"]'); // Modifier le sélecteur en fonction du bouton réel sur la page
+    }
 
-  // Clique sur le bouton pour procéder au paiement
-  await page.click('input[name="proceedToRetailCheckout"]');
-
-  // Vérifie que l'utilisateur est redirigé vers la page de connexion
-  await expect(page).toHaveURL(/signin/);
-});
+    async proceedToCheckout() {
+        await this.proceedToCheckoutButton.click();
+        await this.page.waitForURL('**/signin'); // Attend que l'URL contienne "signin", ce qui signifie qu'on est redirigé vers la page de connexion
+    }
+}
