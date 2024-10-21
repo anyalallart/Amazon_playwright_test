@@ -7,7 +7,7 @@ export class AddToCartButton {
 
   constructor(page: Page) {
     this.page = page;
-    this.SelectionArticle = this.page.locator('tesxt="ZKGYUS Tablier de cuisine Sexy Funny Novelty"');
+    this.SelectionArticle = this.page.locator('text="ZKGYUS Tablier de cuisine Sexy Funny Novelty"');
     this.addToCartButton= this.page.locator('#add-to-cart-button')
   }
 
