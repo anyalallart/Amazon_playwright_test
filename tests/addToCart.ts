@@ -7,7 +7,7 @@ export class AddToCartButton {
 
   constructor(page: Page) {
     this.page = page;
-    this.SelectionArticle = this.page.locator('.a-link-normal s-no-outline');
+    this.SelectionArticle = this.page.locator('.s-image');
     this.addToCartButton= this.page.locator("#add-to-cart-button")
   }
 
