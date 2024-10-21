@@ -22,7 +22,7 @@ export class CartPage {
     }
 
     async ModifyQuantity() {
-        await this.page.click('#a-autoid-0-announce')
+        await this.page.click('#a-autoid-1-announce')
         await this.page.click('#quantity_5')
     }
 }
