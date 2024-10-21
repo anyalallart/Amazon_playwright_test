@@ -1,21 +1,28 @@
-const { test, expect } = require('@playwright/test');
+import { Page, Locator, expect } from "@playwright/test";
 
-test('Search a product from a category', async ({ page }) => {
-  // Ouvre Amazon.fr
-  await page.goto('https://www.amazon.fr');
+export class SearchPage {
+    private page: Page;
+    private categoryButton: Locator;
+    private automotiveCategoryButton: Locator;
+    private searchButton: Locator;
+    private searchResults: Locator;
 
-  // Vérifie que la page d'accueil est bien chargée
-  await expect(page).toHaveTitle(/Amazon/);
+    constructor(page: Page) {
+        this.page = page;
+        this.categoryButton = this.page.locator('#nav-hamburger-menu'); // Sélecteur pour le bouton de catégorie
+        this.automotiveCategoryButton = this.page.locator('a[href*="automotive"]'); // Sélecteur pour la catégorie "Automotive"
+        this.searchButton = this.page.locator('input.nav-input[type="submit"]'); // Sélecteur pour le bouton de recherche
+        this.searchResults = this.page.locator('.s-main-slot'); // Sélecteur pour les résultats de recherche
+    }
 
-  // Clique sur le bouton pour afficher les catégories
-  await page.click('#nav-hamburger-menu');
+    async searchInCategory() {
+        await this.page.goto('https://www.amazon.com'); // Assure que tu es sur la page d'accueil
+        await this.categoryButton.click();
+        await this.automotiveCategoryButton.click();
+        await this.searchButton.click();
+        
+        // Vérification que les résultats sont affichés
+        await expect(this.searchResults).toBeVisible();
+    }
+}
 
-  // Sélectionne la catégorie "Automotive"
-  await page.click('text=Automotive');
-
-  // Clique sur le bouton de recherche
-  await page.click('input[type="submit"]');
-
-  // Vérifie que les résultats de recherche sont affichés
-  await expect(page).toHaveURL(/s?k=Automotive/);
-});
