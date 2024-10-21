@@ -20,7 +20,7 @@ export class CartPage {
         await this.deleteButton.click();
     }
 
-    async ModifyQuantity(quantity: number) {
+    async ModifyQuantity() {
         await this.page.click('#a-autoid-0-announce')
         await this.page.click('#quantity_5')
     }

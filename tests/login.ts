@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 
 export class LoginPage {
   private page: Page;
+  private loginPage: Locator;
   private continueButton: Locator;
   private emailInput: Locator;
   private passwordInput: Locator;
@@ -10,10 +11,15 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
+    this.loginPage = this.page.locator('#nav-link-accountList');
     this.emailInput = this.page.locator('#ap_email');
-    this.continueButton = this.page.locator('#continue-announce');
+    this.continueButton = this.page.getByLabel('Continuer');
     this.passwordInput = this.page.locator('#ap_password');
     this.loginButton = this.page.locator('#signInSubmit');
+  }
+
+  async goToLoginPage() {
+    await this.loginPage.click();
   }
 
   async login(email: string, password: string) {
@@ -28,6 +34,7 @@ export class LoginPage {
   }
 
   async withGoodCredentials() {
+    await this.goToLoginPage();
     await this.login('langer.arnaud@neuf.fr', "Aigrisen");
   }
 }

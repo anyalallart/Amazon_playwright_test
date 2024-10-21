@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { faker } from '@faker-js/faker';
 
-export class AddtochartButton {
+export class AddToCartButton {
   private page: Page;
   private BarInput: Locator;
   private SearchButton: Locator;
@@ -12,7 +12,6 @@ export class AddtochartButton {
     this.BarInput = this.page.locator('#twotabsearchtextbox');
     this.SearchButton = this.page.locator('#nav-search-submit-button');
     this.AddtochartButton = this.page.locator('#a-autoid-1-announce');
-
   }
 
   async search(item: string) {
@@ -20,15 +19,17 @@ export class AddtochartButton {
     await this.SearchButton.click();
   }
 
-  async SearchTablier() {
+  async searchTablier() {
     await this.search("Tablier Beauf");
   }
-  async addtochart(){
+
+  async addToCart(){
     await this.AddtochartButton.click()
   }
-  async mainAddToChart(){
-    this.SearchTablier()
-    this.addtochart()
+
+  async mainAddToCart(){
+    this.searchTablier()
+    this.addToCart()
   }
 }
 
