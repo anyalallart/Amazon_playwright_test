@@ -10,7 +10,7 @@ export class SearchPage {
     constructor(page: Page) {
         this.page = page;
         this.burgerMenuButton = this.page.locator('#nav-hamburger-menu'); // Sélecteur pour le menu burger
-        this.booksCategoryButton = this.page.locator('a[data-menu-id="9"]'); // Sélecteur pour "Livres"
+        this.booksCategoryButton = this.page.locator('text="Livres"'); // Recherche par texte pour "Livres"
         this.allBooksButton = this.page.locator('text="Tous les livres"'); // Recherche par texte pour "Tous les livres"
         this.searchResults = this.page.locator('.s-main-slot'); // Sélecteur pour les résultats de recherche
     }
