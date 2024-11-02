@@ -5,19 +5,17 @@ export class SearchPage {
     private burgerMenuButton: Locator;
     private booksCategoryButton: Locator;
     private allBooksButton: Locator;
-    private searchResults: Locator;
+    private searchResults: string;
 
     constructor(page: Page) {
         this.page = page;
-        this.burgerMenuButton = this.page.locator('#nav-hamburger-menu'); // Sélecteur pour le menu burger
-        this.booksCategoryButton = this.page.locator('text="Livres"'); // Recherche par texte pour "Livres"
-        this.allBooksButton = this.page.locator('text="Tous les livres"'); // Recherche par texte pour "Tous les livres"
-        this.searchResults = this.page.locator('.s-main-slot'); // Sélecteur pour les résultats de recherche
+        this.burgerMenuButton = this.page.getByLabel('Ouvrir le menu Toutes les cat');
+        this.booksCategoryButton = this.page.getByRole('link', { name: 'Livres', exact: true}).first(); 
+        this.allBooksButton = this.page.getByRole('link', { name: 'Tous les livres' }).nth(1);
+        this.searchResults = "https://www.amazon.fr/gp/browse.html?node=301061&ref_=nav_em__lv_0_2_9_2";
     }
 
     async searchInAllBooks() {
-        await this.page.goto('https://www.amazon.com'); // Aller sur la page d'accueil
-
         await this.burgerMenuButton.waitFor({ state: 'visible' }); // Attendre que le menu burger soit visible
         await this.burgerMenuButton.click(); // Ouvre le menu burger
 
@@ -28,6 +26,6 @@ export class SearchPage {
         await this.allBooksButton.click(); // Sélectionne "Tous les livres"
 
         // Vérification que les résultats sont affichés
-        await expect(this.searchResults).toBeVisible();
+        expect(this.page.url()).toBe(this.searchResults);
     }
 }

@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 
 export class createAccount {
   private page: Page;
@@ -24,6 +25,7 @@ export class createAccount {
   }
 
   async goToCreateAccount() {
+    await this.loginPage.waitFor({ state: 'visible' });
     await this.loginPage.click();
     await this.buttonCreateAccount.click();
   }
@@ -34,14 +36,17 @@ export class createAccount {
     await this.passwordInput.fill(password);
     await this.passwordInputCheck.fill(passwordCheck);
     await this.continueButton.click();
-    // await this.page.pause();
   }
 
   async createAccountWithCredentials() {
     await this.goToCreateAccount();
-    await this.createAccount('Jean Kulki', 'langer.arnaud@neuf.fr', 'MonP@ssword', 'MonP@ssword');
+    await this.createAccount('Jean Kulki', 'test.test@gmail.com', 'MonP@ssword', 'MonP@ssword');
   }
 
+  async createAccountWithRandomCredentials() {
+    await this.goToCreateAccount();
+    await this.createAccount(faker.person.fullName(), faker.internet.email(), faker.internet.password(), faker.internet.password());
+  }
 
   async createAccountExistingEmail(name: string, email: string, password: string, passwordCheck: string) {
     await this.nameInput.fill(name);

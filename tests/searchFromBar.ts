@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { faker } from '@faker-js/faker';
 
 export class SearchFromBar {
   private page: Page;
@@ -18,6 +19,11 @@ export class SearchFromBar {
 
   async searchTablier() {
     await this.search("Tablier Beauf");
+    await this.page.pause();
+  }
+
+  async searchRandomItem() {
+    await this.search(faker.commerce.productName());
     await this.page.pause();
   }
 }
