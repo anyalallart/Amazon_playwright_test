@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
     }
 })
 
-test('Login', async ({ Login }) => {
+test('Login with existing account', async ({ Login }) => {
     await Login.withGoodCredentials();
 });
 
@@ -15,7 +15,7 @@ test('Login with random credentials', async ({ Login }) => {
     await Login.loginWithRandomCredentials();
 });
 
-test('Create an account', async ({ CreateAccount }) => {
+test('Create a new Amazon account', async ({ CreateAccount }) => {
     await CreateAccount.createAccountWithCredentials();
 }); 
 
@@ -23,6 +23,6 @@ test('Create account with random credentials', async ({ CreateAccount }) => {
     await CreateAccount.createAccountWithRandomCredentials();
 });
 
-test('Create an account with existing email', async ({ CreateAccount }) => {
+test('Create an account with an existing email', async ({ CreateAccount }) => {
     await CreateAccount.createAccountExistingEmailWithCredentials();
 });

@@ -7,12 +7,12 @@ test.beforeEach(async ({ page }) => {
     }
   })
 
-test('Search category', async ({ SearchProductCategory }) => {
+test('Search a product from a category', async ({ SearchProductCategory }) => {
     await SearchProductCategory.searchInAllBooks();
   }
 );
 
-test('Search from bar', async ({ SearchFromBar }) => {
+test('Search for a product', async ({ SearchFromBar }) => {
     await SearchFromBar.searchTablier();
   }
 );

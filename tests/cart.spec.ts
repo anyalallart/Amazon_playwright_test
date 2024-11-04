@@ -7,13 +7,13 @@ test.beforeEach(async ({ page }) => {
   }
 });
 
-test('Add to cart', async ({ AddToCart, SearchFromBar }) => {
+test('Add a product to the shopping cart', async ({ AddToCart, SearchFromBar }) => {
   await SearchFromBar.searchTablier();
   await AddToCart.gotoPageArticle();
   await AddToCart.addToCart();
 });
 
-test('Delete from Cart', async ({ AddToCart, SearchFromBar, Cart }) => {
+test('Remove a product from the cart', async ({ AddToCart, SearchFromBar, Cart }) => {
   await SearchFromBar.searchTablier();
   await AddToCart.gotoPageArticle();
   await AddToCart.addToCart();
@@ -21,7 +21,7 @@ test('Delete from Cart', async ({ AddToCart, SearchFromBar, Cart }) => {
   await Cart.deleteCart();
 });
 
-test('Modify Cart', async ({ AddToCart, SearchFromBar, Cart }) => {
+test('Modify quantity of a product from the cart', async ({ AddToCart, SearchFromBar, Cart }) => {
   await SearchFromBar.searchTablier();
   await AddToCart.gotoPageArticle();
   await AddToCart.addToCart();
@@ -29,7 +29,7 @@ test('Modify Cart', async ({ AddToCart, SearchFromBar, Cart }) => {
   await Cart.ModifyQuantity();
 })
 
-test('Checkout', async ({ AddToCart, SearchFromBar, Cart, Checkout }) => {
+test('Proceed to checkout', async ({ AddToCart, SearchFromBar, Cart, Checkout }) => {
   await SearchFromBar.searchTablier();
   await AddToCart.gotoPageArticle();
   await AddToCart.addToCart();
